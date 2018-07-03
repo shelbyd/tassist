@@ -15,15 +15,8 @@ impl Tas {
     }
 
     pub fn as_lua(&self, start_state_path: &str) -> String {
-        format!(r#"
-            savestate.load("{}")
-            console.clear()
-            client.reboot_core()
-            client.unpause()
-            
-            while true do
-                emu.frameadvance()
-            end
-        "#, start_state_path)
+        format!(
+            include_str!("tas_template.tpl.lua"),
+            initial_save_state_file=start_state_path)
     }
 }
