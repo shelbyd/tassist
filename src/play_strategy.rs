@@ -10,7 +10,7 @@ use tas::Tas;
 pub fn from_option(option: PlayStrategyOpt) -> Box<PlayStrategy> {
     match option {
         PlayStrategyOpt::WatchedFile(watched_file) => {
-            Box::new(WatchedFile::new(watched_file.file.into()))
+            Box::new(WatchedFile::new(watched_file.directory.into()))
         }
     }
 }
