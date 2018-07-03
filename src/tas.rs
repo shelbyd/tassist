@@ -9,9 +9,14 @@ impl Tas {
             start_state,
         }
     }
+    
+    pub fn start_state(&self) -> &[u8] {
+        &self.start_state
+    }
 
-    pub fn as_lua(&self) -> String {
-        String::from(r#"
+    pub fn as_lua(&self, start_state_path: &str) -> String {
+        format!(r#"
+            savestate.load("{}")
             console.clear()
             client.reboot_core()
             client.unpause()
@@ -19,6 +24,6 @@ impl Tas {
             while true do
                 emu.frameadvance()
             end
-        "#)
+        "#, start_state_path)
     }
 }
