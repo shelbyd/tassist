@@ -4,12 +4,6 @@ pub struct Tas {
 }
 
 impl Tas {
-    pub fn from_state(start_state: Vec<u8>) -> Tas {
-        Tas {
-            start_state,
-        }
-    }
-    
     pub fn start_state(&self) -> &[u8] {
         &self.start_state
     }

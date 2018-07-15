@@ -8,8 +8,6 @@ pub struct Options {
 pub enum Command {
     #[structopt(name = "play")]
     Play(Play),
-    #[structopt(name = "create_from_state")]
-    CreateFromState(CreateFromState),
 }
 
 #[derive(StructOpt, Debug)]
@@ -33,11 +31,4 @@ pub enum PlayStrategy {
 pub struct WatchedFile {
     /// The directory to place the file to watch
     pub directory: String,
-}
-
-#[derive(StructOpt, Debug)]
-pub struct CreateFromState {
-    pub state_file: String,
-    
-    pub tas_file: String,
 }
