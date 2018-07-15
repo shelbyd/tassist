@@ -106,7 +106,7 @@ named!(input<CompleteStr, Expression>,
 
 named!(buttons<CompleteStr, Vec<String>>,
     map!(
-        separated_nonempty_list!(tag!(","), bare_word),
+        separated_nonempty_list!(ws!(tag!(",")), bare_word),
         |buttons| buttons.into_iter().map(|s| s.to_string()).collect()
     )
 );
@@ -161,6 +161,12 @@ mod tests {
                    Ok((CompleteStr(""), Expression::Input(vec!["Foo".to_string()]))));
         assert_eq!(expr(CompleteStr("Input Foo\n")),
                    Ok((CompleteStr(""), Expression::Input(vec!["Foo".to_string()]))));
+        assert_eq!(expr(CompleteStr("Input Foo, Bar, Baz")),
+                   Ok((CompleteStr(""), Expression::Input(vec![
+                       "Foo".to_string(),
+                       "Bar".to_string(),
+                       "Baz".to_string(),
+                   ]))));
     }
 
     #[test]
