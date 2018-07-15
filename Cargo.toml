@@ -5,4 +5,5 @@ authors = ["Shelby Doolittle <shelby@shelbyd.com>"]
 
 [dependencies]
 failure = "0.1"
+nom = "^4.0"
 structopt = "0.2"
