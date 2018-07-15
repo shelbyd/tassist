@@ -75,7 +75,7 @@ named!(string<CompleteStr, CompleteStr>, delimited!(quote, inner_string, quote))
 named!(quote<CompleteStr, CompleteStr>, tag!("\""));
 named!(inner_string<CompleteStr, CompleteStr>, escaped!(none_of!("\\\""), '\\', one_of!("\"\\")));
 
-named!(expressions<CompleteStr, Vec<Expression>>, many0!(expr));
+named!(expressions<CompleteStr, Vec<Expression>>, ws!(many0!(expr)));
 
 named!(expr<CompleteStr, Expression>, alt!(
     wait |
