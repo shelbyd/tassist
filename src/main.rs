@@ -1,11 +1,7 @@
-extern crate bincode;
 extern crate failure;
-#[macro_use]
-extern crate serde_derive;
 #[macro_use]
 extern crate structopt;
 
-use bincode::{deserialize_from};
 use failure::Error;
 use std::fs::File;
 use structopt::StructOpt;
@@ -30,7 +26,7 @@ fn run() -> Result<(), Error> {
     
     match options.command {
         options::Command::Play(play) => {
-            let tas: Tas = deserialize_from(File::open(&play.tas_file)?)?;
+            let tas: Tas = Tas::parse(File::open(&play.tas_file)?)?;
             let play_strategy = play_strategy::from_option(play.strategy);
             play_strategy.play(&tas)?;
         }

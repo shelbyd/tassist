@@ -1,16 +1,16 @@
-#[derive(Deserialize, Serialize)]
+use failure::Error;
+use std::io::Read;
+
 pub struct Tas {
-    start_state: Vec<u8>,
 }
 
 impl Tas {
-    pub fn start_state(&self) -> &[u8] {
-        &self.start_state
+    pub fn as_lua(&self) -> String {
+        format!(
+            include_str!("tas_template.tpl.lua"))
     }
 
-    pub fn as_lua(&self, start_state_path: &str) -> String {
-        format!(
-            include_str!("tas_template.tpl.lua"),
-            initial_save_state_file=start_state_path)
+    pub fn parse<R: Read>(_: R) -> Result<Tas, Error> {
+        Ok(Tas {})
     }
 }
